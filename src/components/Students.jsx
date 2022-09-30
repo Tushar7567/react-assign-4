@@ -1,38 +1,44 @@
-import React, { Component } from 'react';
-import Details from './Details';
+import React from 'react';
+import {  Link } from 'react-router-dom';
 
-export default class Students extends Component {
-  constructor(){
-      super();
-      this.state = {
-          sArr:[{name:'John', age:'24', course:'MERN', batch:'October'},
-          {name:'Doe', age:'25', course:'MERN', batch:'November'},
-          {name:'Zelensky', age:'41', course:'MERN', batch:'December'},
-          {name:'Putin', age:'58', course:'MERN', batch:'May'},
-          {name:'Biden', age:'69', course:'MERN', batch:'April'}],
-          name:'',
-          age:'',
-          course: '',
-          batch: ''
 
-      }
-  }
-  addNewStudent = () =>{
-      // console.log('Add new student button cicked');
-      const updatedSArr = [...this.state.sArr];
-      updatedSArr.push({name: this.state.name, age: this.state.age, course: this.state.course, batch: this.state.batch})
-      this.setState({sArr: updatedSArr});
-  }
-  render() {
+const  Students = (props) =>{
+ 
+  const studentList = () =>{ return props.sArr.map(
+    (item,index) => {
+    return(
+         <div key={`${index}`} className="row">
+            <div>{item.name}</div>
+            <div>{item.age}</div>
+            <div>{item.course}</div>
+            <div>{item.batch}</div>
+            <div><Link to={`/desc/${index}`}>Edit</Link></div>
+        </div> 
+    )
+    }
+  )}
+  
     return (
-      <div>
+      <div> {console.log(props.sArr)}
         <div className='student-heading'>
         <h1>Students Details</h1>
-        <button className='btn-addstudent' onClick={this.addNewStudent} >Add new student</button>
+        <Link to='/addnew'> <button className='btn-addstudent'  >Add new student</button></Link>
+       
         </div>
-        <Details />
+        <div className='container'>
+          <div className="row">
+            <div>Name</div>
+            <div>Age</div>
+            <div>Course</div>
+            <div>Batch</div>
+            <div>Change</div>
+          </div>
+          {studentList()}
+      </div>
         
       </div>
     );
-  }
+ 
 }
+
+export default Students;
