@@ -1,9 +1,9 @@
 import React from 'react';
-import {  Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-
+// {`/desc/${index}`
 const  Students = (props) =>{
- 
+  const navigate = useNavigate();
   const studentList = () =>{ return props.sArr.map(
     (item,index) => {
     return(
@@ -12,17 +12,16 @@ const  Students = (props) =>{
             <div>{item.age}</div>
             <div>{item.course}</div>
             <div>{item.batch}</div>
-            <div><Link to={`/desc/${index}`}>Edit</Link></div>
+            <div><Link to ={`/desc/${index}`}  ><button onClick={()=>{props.setI(index)}}>Edit</button></Link></div>
         </div> 
     )
     }
   )}
-  
     return (
       <div> {console.log(props.sArr)}
         <div className='student-heading'>
         <h1>Students Details</h1>
-        <Link to='/addnew'> <button className='btn-addstudent'  >Add new student</button></Link>
+         <button className='btn-addstudent' onClick={()=>{navigate('/students/addnew')}} >Add new student</button>
        
         </div>
         <div className='container'>
