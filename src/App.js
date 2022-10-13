@@ -9,7 +9,8 @@ import {useState} from 'react';
 
 function App() {
   // let [{name, age, course, batch}, {setName, setAge, setCourse, setBatch}] = useState(''); 
-  let [id, setId] = useState(4);
+  // let [id, setId] = useState(4);
+  let id = 4;
   let [name, setName] = useState('');
   let [age, setAge] = useState('');
   let [course, setCourse] = useState('');
