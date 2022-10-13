@@ -9,23 +9,27 @@ import {useState} from 'react';
 
 function App() {
   // let [{name, age, course, batch}, {setName, setAge, setCourse, setBatch}] = useState(''); 
+  let [id, setId] = useState(4);
   let [name, setName] = useState('');
   let [age, setAge] = useState('');
   let [course, setCourse] = useState('');
   let [batch, setBatch] = useState('');
 
-  let [sArr, setsArr] = useState([{name:'John', age:'24', course:'MERN', batch:'October'},
-  {name:'Doe', age:'25', course:'MERN', batch:'November'},
-  {name:'Zelensky', age:'41', course:'MERN', batch:'December'},
-  {name:'Putin', age:'58', course:'MERN', batch:'May'},
-  {name:'Biden', age:'69', course:'MERN', batch:'April'}]);
+  //edit id
+  let [i,setI] = useState(0);
 
+
+  let [sArr, setsArr] = useState([{id:0, name:'John', age:'24', course:'MERN', batch:'October'},
+  {id:1, name:'Doe', age:'25', course:'MERN', batch:'November'},
+  {id:2, name:'Zelensky', age:'41', course:'MERN', batch:'December'},
+  {id:3, name:'Putin', age:'58', course:'MERN', batch:'May'},
+  {id:4, name:'Biden', age:'69', course:'MERN', batch:'April'}]);
 
   const handleUpdateName = (e,i) =>{
     setName(e.target.value);
     const updatedSArr = [...sArr];
     let currentArr = updatedSArr[i];
-    currentArr = {name: e.target.value, age: currentArr.age, course: currentArr.course, batch: currentArr.batch}
+    currentArr = {id:id+1, name: e.target.value, age: currentArr.age, course: currentArr.course, batch: currentArr.batch}
     updatedSArr[i] = currentArr;
     setsArr(updatedSArr);
     console.log(sArr[i]);
@@ -34,7 +38,7 @@ function App() {
     setAge(e.target.value);
     const updatedSArr = [...sArr];
     let currentArr = updatedSArr[i];
-    currentArr = {name: currentArr.name, age: e.target.value , course: currentArr.course, batch: currentArr.batch}
+    currentArr = {id:id+1, name: currentArr.name, age: e.target.value , course: currentArr.course, batch: currentArr.batch}
     updatedSArr[i] = currentArr;
     setsArr(updatedSArr);
     console.log(sArr[i]);
@@ -44,7 +48,7 @@ function App() {
     setCourse(e.target.value);
     const updatedSArr = [...sArr];
     let currentArr = updatedSArr[i];
-    currentArr = {name: currentArr.name, age: currentArr.age, course: e.target.value, batch: currentArr.batch}
+    currentArr = {id:id+1, name: currentArr.name, age: currentArr.age, course: e.target.value, batch: currentArr.batch}
     updatedSArr[i] = currentArr;
     setsArr(updatedSArr);
     console.log(sArr[i]);
@@ -54,7 +58,7 @@ function App() {
     setBatch(e.target.value);
     const updatedSArr = [...sArr];
     let currentArr = updatedSArr[i];
-    currentArr = {name: currentArr.name, age: currentArr.age, course: currentArr.course, batch: e.target.value }
+    currentArr = {id:id+1, name: currentArr.name, age: currentArr.age, course: currentArr.course, batch: e.target.value }
     updatedSArr[i] = currentArr;
     setsArr( updatedSArr);
     console.log(sArr[i]);
@@ -78,10 +82,10 @@ function App() {
           </div>
           <Routes>
               <Route path='/' element={<Home />} ></Route>
-              <Route path='/students' element={<Students sArr={sArr}   />} ></Route>
-              <Route path='/desc/:index' element={<Edit sArr={sArr}   handleUpdateName={handleUpdateName} handleUpdateAge={handleUpdateAge} handleUpdateCourse={handleUpdateCourse} handleUpdateBatch={handleUpdateBatch} />} ></Route>
+              <Route path='/students' element={<Students sArr={sArr} setI={setI}  />} ></Route>
+              <Route path='/desc/:id' element={<Edit sArr={sArr} i={i}  handleUpdateName={handleUpdateName} handleUpdateAge={handleUpdateAge} handleUpdateCourse={handleUpdateCourse} handleUpdateBatch={handleUpdateBatch} />} ></Route>
               <Route path='/contactUs' element={<ContactUs />} ></Route>
-              <Route path='/addnew' element={<Ads sArr={sArr}  name={name} age={age} course={course} batch={batch} setName={setName} setAge={setAge} setCourse={setCourse} setBatch={setBatch} setsArr={setsArr}  />} ></Route>
+              <Route path='/students/addnew' element={<Ads sArr={sArr} id={id} name={name} age={age} course={course} batch={batch} setName={setName} setAge={setAge} setCourse={setCourse} setBatch={setBatch} setsArr={setsArr}  />} ></Route>
 
           </Routes>
       </BrowserRouter>
