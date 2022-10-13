@@ -1,14 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 
 const Ads = (props) => {
-    
+    const navigate = useNavigate();
     const add = () => {
         const updatedSArr = [...props.sArr];
           let currentArr = updatedSArr[props.sArr.length];
-          currentArr = {name: props.name, age: props.age, course: props.course, batch: props.batch }
+          currentArr = {id: props.id+1, name: props.name, age: props.age, course: props.course, batch: props.batch }
           updatedSArr[props.sArr.length] = currentArr;
           props.setsArr(updatedSArr);
+        navigate('/students');
     }
     return (
         <>
@@ -22,8 +23,8 @@ const Ads = (props) => {
                     <input type="text" autoComplete='true' placeholder='Batch' onChange={(e) => props.setBatch(e.target.value)} />
                 </div>
             </div>
-            <Link to='/students'><button className='btn-pos'  >Cancel</button></Link>
-            <Link to='/students'><button className='btn-pos' onClick={add} >Add</button></Link>
+            <button className='btn-pos' onClick={()=>{navigate('/students')}}  >Cancel</button>
+            <button className='btn-pos' onClick={add} >Add</button>
 
         </>
      );
